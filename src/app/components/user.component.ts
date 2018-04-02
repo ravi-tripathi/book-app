@@ -1,5 +1,11 @@
 import { Component } from '@angular/core';
+import { Store } from '@ngrx/store';
 import {PostsService} from '../services/posts.service';
+
+interface AppState {
+  books: any;
+}
+
 @Component({
   selector: 'user',
   template: `
@@ -47,7 +53,7 @@ export class UserComponent  {
 	//posts: Post[];
 	posts: any
 
-	constructor(private postsService: PostsService){
+	constructor(private postsService: PostsService, private store: Store<AppState>){
 		console.log('constructor ran');
 		this.name = 'Google Books Search';
 		this.address = {
