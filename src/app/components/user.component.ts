@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {PostsService} from '../services/posts.service'
+import {PostsService} from '../services/posts.service';
 @Component({
   selector: 'user',
   template: `
@@ -36,13 +36,16 @@ import {PostsService} from '../services/posts.service'
   `,
   providers: [PostsService]
 })
-export class UserComponent  { 
+export class UserComponent  {
 	name : string;
 	email : string;
-	address: address;
-	hobbies: string[];
+	//address: address;
+	address: any;
+	//hobbies: string[];
+	hobbies: any;
 	showHobbies: boolean;
-	posts: Post[];
+	//posts: Post[];
+	posts: any
 
 	constructor(private postsService: PostsService){
 		console.log('constructor ran');
@@ -73,24 +76,24 @@ export class UserComponent  {
 		}
 	}
 
-	addHobby(hobby){
+	addHobby(hobby:any){
 		console.log(hobby);
 		this.hobbies.push(hobby);
 	}
 
-	
-	interface address {
-		street: string;
-		city: string;
-		state: string;
-	}
 
-	interface Post{
-		title: string;
-		authors: string[];
-		infoLink: string;
-		thumbnailUrl : string;
-
-	}
+	// interface address {
+	// 	street: string;
+	// 	city: string;
+	// 	state: string;
+	// }
+    //
+	// interface Post{
+	// 	title: string;
+	// 	authors: string[];
+	// 	infoLink: string;
+	// 	thumbnailUrl : string;
+    //
+	// }
 
 }
