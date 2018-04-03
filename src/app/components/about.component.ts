@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+
 
 @Component({
   moduleId: module.id,
@@ -8,8 +10,8 @@ import { Component } from '@angular/core';
 export class AboutComponent  {
     header_title: string;
 
-    constructor(){
+    constructor( private route: ActivatedRoute){
       this.header_title = "This is an about page!"
     }
-    
+
  }

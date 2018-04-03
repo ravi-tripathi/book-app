@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { NgForm } from '@angular/forms';
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+
 import {PostsService} from '../services/posts.service';
 
 interface AppState {
@@ -9,14 +11,14 @@ interface AppState {
 
 @Component({
   selector: 'user',
-  template: 
+  template:
   `
   	<h1> Book Search Application </h1>
   	
 	<form #f="ngForm" (ngSubmit)="onSubmit(f)">
         <label>Search Books </label><br />
 		<input id="searchField" type="text" name="name" [(ngModel)]="name" /><br />
-		<button type="submit" [disabled]="OnOff()">Submit</button>
+		<button type="submit" [disabled]="!name">Submit</button>
     </form>
     <hr />
     <h3>List of Books</h3>
@@ -24,7 +26,7 @@ interface AppState {
 		<h3>{{post.volumeInfo.title}}</h3>
 		<h5 class="center-align black-text"> By: {{post.volumeInfo.authors}}</h5>
 		<img class="aligning card z-depth-5" id="dynamic" src="{{post.volumeInfo.imageLinks.thumbnail}}"><br>
-		<a href="{{post.volumeInfo.infoLink}}"><button id="imagebutton" class="btn red aligning">Read More</button></a>
+		<a href="[routerLink]='['/book', post.id]'" ><button id="imagebutton" class="btn red aligning">Read More</button></a>
     </div>
   `,
   providers: [PostsService]
@@ -34,38 +36,31 @@ export class UserComponent  {
 	posts: any;
 	queryParam: string;
 	readQuery: any;
-	OnOff: any;
-	OnOff: function (){
-    	if(this.name == ''){
-			return true;
-		}else{
-			return false;
-		}
-	}
+
+  constructor(private postsService: PostsService, private store: Store<AppState>, private route: ActivatedRoute
+  ){
+    console.log('constructor ran');
+
+
+  }
+
 	onSubmit(f: NgForm) {
-		console.log('on submit funcn');
-		console.dir(f.form.value.name);
     	if(this.queryParam == ''){
 			alert("Please Enter Something");
 		}else{
 			this.queryParam= f.form.value.name;
 			this.posts = [];
-			console.dir(document.getElementById('searchField'));
 			this.postsService.getPosts(this.queryParam).subscribe(posts =>{
-				console.dir(posts);
 				this.posts = posts.items;
-				console.dir(this.posts);
-				console.log(this.posts[0].volumeInfo.title);
-				console.log(this.posts[0].volumeInfo.authors);
-				console.log(this.posts[0].volumeInfo.infoLink);
 			});
 		}
-    	
+
 	}
-	constructor(private postsService: PostsService, private store: Store<AppState>){
-		console.log('constructor ran');
-		
-	}
+
+
+  goToBook(book: any) {
+    this.router.navigate(['/heroes', { id: heroId, foo: 'foo' }]);
+  }
 
 
 }

@@ -10,7 +10,7 @@ const appRoutes: Routes = [
         component: UserComponent
     },
     {
-        path: 'about',
+        path: 'book/:id',
         component: AboutComponent
     }
 ];
