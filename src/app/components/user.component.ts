@@ -23,10 +23,10 @@ interface AppState {
     <hr />
     <h3>List of Books</h3>
     <div *ngFor ="let post of posts;">
-		<h3>{{post.volumeInfo.title}}</h3>
-		<h5 class="center-align black-text"> By: {{post.volumeInfo.authors}}</h5>
-		<img class="aligning card z-depth-5" id="dynamic" src="{{post.volumeInfo.imageLinks.thumbnail}}"><br>
-		<a href="[routerLink]='['/book', post.id]'" ><button id="imagebutton" class="btn red aligning">Read More</button></a>
+		  <h3>{{post.volumeInfo.title}}</h3>
+		  <h5 class="center-align black-text"> By: {{post.volumeInfo.authors}}</h5>
+		  <img class="aligning card z-depth-5" id="dynamic" src="{{post.volumeInfo.imageLinks.thumbnail}}"><br>
+		  <button id="imagebutton" class="btn red aligning" (click)="goToBook(post.id)">>Read More</button>
     </div>
   `,
   providers: [PostsService]
@@ -37,7 +37,7 @@ export class UserComponent  {
 	queryParam: string;
 	readQuery: any;
 
-  constructor(private postsService: PostsService, private store: Store<AppState>, private route: ActivatedRoute
+  constructor(private postsService: PostsService, private store: Store<AppState>, private route: Router
   ){
     console.log('constructor ran');
 
@@ -58,8 +58,8 @@ export class UserComponent  {
 	}
 
 
-  goToBook(book: any) {
-    this.router.navigate(['/heroes', { id: heroId, foo: 'foo' }]);
+  goToBook(id: any) {
+    this.route.navigate(['book', id]);
   }
 
 

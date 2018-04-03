@@ -5,7 +5,7 @@ import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 @Component({
   moduleId: module.id,
   selector: 'about',
-  templateUrl: 'about.component.html',
+  templateUrl: 'about.component.html'
 })
 export class AboutComponent  {
     header_title: string;
