@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import { currentBookService } from '../services/currentBook.service';
+
 
 
 @Component({
@@ -9,9 +11,12 @@ import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 })
 export class AboutComponent  {
     header_title: string;
+    selectedBook: any;
 
-    constructor( private route: ActivatedRoute){
-      this.header_title = "This is an about page!"
+    constructor( private route: ActivatedRoute, private currentBook: currentBookService){
+      this.header_title = "This is an about page!";
+      this.selectedBook = currentBook.getCurrentBook();
+      console.log('ho', this.selectedBook);
     }
 
  }

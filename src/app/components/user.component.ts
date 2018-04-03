@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { NgForm } from '@angular/forms';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import { currentBookService } from '../services/currentBook.service'
 
 import {PostsService} from '../services/posts.service';
 
@@ -26,7 +27,7 @@ interface AppState {
 		  <h3>{{post.volumeInfo.title}}</h3>
 		  <h5 class="center-align black-text"> By: {{post.volumeInfo.authors}}</h5>
 		  <img class="aligning card z-depth-5" id="dynamic" src="{{post.volumeInfo.imageLinks.thumbnail}}"><br>
-		  <button id="imagebutton" class="btn red aligning" (click)="goToBook(post.id)">>Read More</button>
+		  <button id="imagebutton" class="btn red aligning" (click)="goToBook(post)">>Read More</button>
     </div>
   `,
   providers: [PostsService]
@@ -37,7 +38,7 @@ export class UserComponent  {
 	queryParam: string;
 	readQuery: any;
 
-  constructor(private postsService: PostsService, private store: Store<AppState>, private route: Router
+  constructor(private postsService: PostsService, private store: Store<AppState>, private route: Router, private currentBook: currentBookService
   ){
     console.log('constructor ran');
 
@@ -58,8 +59,9 @@ export class UserComponent  {
 	}
 
 
-  goToBook(id: any) {
-    this.route.navigate(['book', id]);
+  goToBook(post: any) {
+    this.currentBook.seCurrentBook(post);
+    this.route.navigate(['book', post.id]);
   }
 
 
