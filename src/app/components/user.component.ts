@@ -36,34 +36,35 @@ export class UserComponent  {
 	readQuery: any;
 	OnOff: any;
 	OnOff: function (){
-		//console.dir(f.form.value.name);
     	if(this.name == ''){
 			return true;
 		}else{
-			return true;
+			return false;
 		}
 	}
 	onSubmit(f: NgForm) {
+		console.log('on submit funcn');
 		console.dir(f.form.value.name);
     	if(this.queryParam == ''){
 			alert("Please Enter Something");
 		}else{
 			this.queryParam= f.form.value.name;
+			this.posts = [];
+			console.dir(document.getElementById('searchField'));
+			this.postsService.getPosts(this.queryParam).subscribe(posts =>{
+				console.dir(posts);
+				this.posts = posts.items;
+				console.dir(this.posts);
+				console.log(this.posts[0].volumeInfo.title);
+				console.log(this.posts[0].volumeInfo.authors);
+				console.log(this.posts[0].volumeInfo.infoLink);
+			});
 		}
     	
 	}
 	constructor(private postsService: PostsService, private store: Store<AppState>){
 		console.log('constructor ran');
-		this.posts = [];
-		console.dir(document.getElementById('searchField'));
-		this.postsService.getPosts(this.queryParam).subscribe(posts =>{
-			console.dir(posts);
-			this.posts = posts.items;
-			console.dir(this.posts);
-			console.log(this.posts[0].volumeInfo.title);
-			console.log(this.posts[0].volumeInfo.authors);
-			console.log(this.posts[0].volumeInfo.infoLink);
-		});
+		
 	}
 
 
