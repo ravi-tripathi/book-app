@@ -5,6 +5,8 @@ import { HttpModule } from '@angular/http';
 import { StoreModule } from '@ngrx/store';
 import { bookReducer } from './reducers/bookReducer';
 
+
+
 import { AppComponent }  from './app.component';
 import { UserComponent }  from './components/user.component';
 @NgModule({

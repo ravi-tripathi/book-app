@@ -8,8 +8,8 @@ export class PostsService {
         console.log('PostsService Initialized...');
     }
 
-    getPosts(){
-        return this.http.get('https://www.googleapis.com/books/v1/volumes?q='+'test'+'&key=AIzaSyA5XAF8znBqBlooCr0nKkA72Nai_wGaLbQ')
+    getPosts(bookName: any){
+        return this.http.get('https://www.googleapis.com/books/v1/volumes?q='+bookName+'&key=AIzaSyA5XAF8znBqBlooCr0nKkA72Nai_wGaLbQ')
             .map(res => res.json());
     }
 }
