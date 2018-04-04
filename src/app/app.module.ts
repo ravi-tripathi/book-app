@@ -5,7 +5,7 @@ import { HttpModule } from '@angular/http';
 import { StoreModule } from '@ngrx/store';
 import { RouterModule, Routes } from '@angular/router';
 import {currentBookService} from './services/currentBook.service';
-import { bookReducer } from './reducers/bookReducer';
+import { booksReducer, currentBookReducer } from './reducers/bookReducer';
 
 
 
@@ -26,7 +26,7 @@ const appRoutes: Routes = [
 ];
 
 @NgModule({
-  imports:      [ BrowserModule, FormsModule , HttpModule, StoreModule.provideStore({ books: bookReducer }), RouterModule.forRoot(
+  imports:      [ BrowserModule, FormsModule , HttpModule, StoreModule.provideStore({ books: booksReducer, currentBook: currentBookReducer }), RouterModule.forRoot(
     appRoutes,
     { enableTracing: true } // <-- debugging purposes only
   )],
