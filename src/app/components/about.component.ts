@@ -13,13 +13,17 @@ interface AppState {
 @Component({
   moduleId: module.id,
   selector: 'about',
-  templateUrl: 'about.component.html',
+  //templateUrl: 'about.component.html',
+  template: 'Hello',
   changeDetection: ChangeDetectionStrategy.OnPush
 
 })
 export class AboutComponent  {
     header_title: string;
     selectedBook: Observable<any>;
+    // description: any;
+    // imageThumbnailUrl: any;
+    // authors: any;
 
     constructor( private route: ActivatedRoute, private currentBook: currentBookService, private store: Store<AppState>){
       this.header_title = "This is an about page!";
@@ -27,8 +31,11 @@ export class AboutComponent  {
       //this.selectedBook = store.select('currentBook');
       store.select('currentBook').subscribe((d)=>{
         this.selectedBook = d;
+        // this.header_title = this.selectedBook.volumeInfo.title;
+        // this.description = this.selectedBook.volumeInfo.description;
+        // this.imageThumbnailUrl =this.selectedBook.volumeInfo.imageLinks.thumbnail;
+        // this.authors = this.selectedBook.volumeInfo.authors;
       })
-
       console.log('ho', this.selectedBook);
     }
 

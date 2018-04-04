@@ -13,25 +13,9 @@ interface AppState {
 }
 
 @Component({
+	moduleId: module.id,
   selector: 'user',
-  template:
-  `
-  	<h1> Book Search Application </h1>
-  	
-	<form #f="ngForm" (ngSubmit)="onSubmit(f)">
-        <label>Search Books </label><br />
-		<input id="searchField" type="text" name="name" [(ngModel)]="name" /><br />
-		<button type="submit" [disabled]="!name">Submit</button>
-    </form>
-    <hr />
-    <h3>List of Books</h3>
-    <div *ngFor ="let post of posts;">
-		  <h3>{{post.volumeInfo.title}}</h3>
-		  <h5 class="center-align black-text"> By: {{post.volumeInfo.authors}}</h5>
-		  <img class="aligning card z-depth-5" id="dynamic" src="{{post.volumeInfo.imageLinks.thumbnail}}"><br>
-		  <button id="imagebutton" class="btn red aligning" (click)="goToBook(post)">>Read More</button>
-    </div>
-  `,
+  templateUrl:'user.component.html',
   providers: [PostsService],
   changeDetection: ChangeDetectionStrategy.OnPush
 
