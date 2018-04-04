@@ -3,3 +3,27 @@ h1 {
   font-family: Arial, Helvetica, sans-serif;
   font-size: 250%;
 }
+body{
+  padding-left: 10%;
+  padding-right: 10%;
+}
+input{
+  height: 30px;
+  text-align: center;
+  width: 200px;
+  margin-top: 2%;
+  margin-bottom: 2%;
+  font-style: normal;
+  background: #d8ecf0;
+  border: 1px solid #d8ecf0;
+}
+button{
+  height: 26px;
+  text-align: center;
+  width: 150px;
+  color: white;
+  margin-bottom: 2%;
+  font-style: normal;
+  background: #369;
+  border: 1px solid #d8ecf0;
+}

@@ -12,10 +12,16 @@ import { currentBookService } from '../services/currentBook.service';
 export class AboutComponent  {
     header_title: string;
     selectedBook: any;
+    description: any;
+    imageThumbnailUrl: any;
+    authors: any;
 
     constructor( private route: ActivatedRoute, private currentBook: currentBookService){
-      this.header_title = "This is an about page!";
       this.selectedBook = currentBook.getCurrentBook();
+      this.header_title = this.selectedBook.volumeInfo.title;
+      this.description = this.selectedBook.volumeInfo.description;
+      this.imageThumbnailUrl =this.selectedBook.volumeInfo.imageLinks.thumbnail;
+      this.authors = this.selectedBook.volumeInfo.authors;
       console.log('ho', this.selectedBook);
     }
 
