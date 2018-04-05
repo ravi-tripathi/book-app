@@ -7,7 +7,7 @@
     </form>
     <hr />
     <h3>List of Books</h3>
-    <div *ngFor ="let post of posts.items;">
+    <div *ngFor ="let post of postList.items;">
 		  <h3>{{post.volumeInfo.title}}</h3>
 		  <h5 class="center-align black-text"> By: {{post.volumeInfo.authors}}</h5>
 		  <img class="aligning card z-depth-5" id="dynamic" src="{{post.volumeInfo.imageLinks.thumbnail}}"><br>

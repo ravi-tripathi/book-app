@@ -56,9 +56,9 @@ export class UserComponent  {
 
   goToBook(post: any) {
     this.store.dispatch({type: CURRENT_BOOK, payload: {
-        title: post.title,
-        description: post.description,
-        thumbnail: post.imageLinks.thumbnail
+        title: post.volumeInfo.title,
+        description: post.volumeInfo.description,
+        thumbnail: post.volumeInfo.imageLinks.thumbnail
 
       }
     });
