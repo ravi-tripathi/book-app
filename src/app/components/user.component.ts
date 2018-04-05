@@ -8,12 +8,16 @@ import {PostsService} from '../services/posts.service';
 import {Observable} from 'rxjs/Observable';
 
 interface AppState {
-  books: any;
+  books: postList;
   currentBook: any;
 }
 
+interface postList {
+  items: any
+}
+
 @Component({
-	moduleId: module.id,
+  moduleId: module.id,
   selector: 'user',
   templateUrl:'user.component.html',
   providers: [PostsService],
@@ -21,39 +25,43 @@ interface AppState {
 
 })
 export class UserComponent  {
-	name : string;
-	posts: Observable<any>;
-	queryParam: string;
-	readQuery: any;
+  name : string;
+  posts: Observable<postList>;
+  queryParam: string;
+  readQuery: any;
+  postList: postList;
 
-  constructor(private postsService: PostsService, private store: Store<AppState>, private route: Router, private currentBook: currentBookService
+  constructor(private postsService: PostsService, private store: Store<AppState>, private route: Router
   ){
     console.log('constructor ran');
-    //this.posts = store.select('books');
-    store.select('books').subscribe((d)=>{
-      this.posts = d;
+    this.posts = store.select('books');
+    this.posts.subscribe((d)=>{
+      this.postList = d;
     })
 
 
   }
 
-	onSubmit(f: NgForm) {
-    	if(this.queryParam == ''){
-			alert("Please Enter Something");
-		}else{
-			this.queryParam= f.form.value.name;
-			//this.posts = [];
-			this.postsService.getPosts(this.queryParam).subscribe(posts =>{
-				//this.posts = posts.items;
-				this.store.dispatch({type: POST_BOOKS, payload: posts.items});
-			});
-		}
+  onSubmit(f: NgForm) {
+    if(this.queryParam == ''){
+      alert("Please Enter Something");
+    }else{
+      this.queryParam= f.form.value.name;
+      this.postsService.getPosts(this.queryParam).subscribe(posts =>{
+        this.store.dispatch({type: POST_BOOKS, payload: { items:posts.items }});
+      });
+    }
 
-	}
+  }
 
   goToBook(post: any) {
-    //this.currentBook.seCurrentBook(post);
-    this.store.dispatch({type: CURRENT_BOOK, payload: post});
+    this.store.dispatch({type: CURRENT_BOOK, payload: {
+        title: post.title,
+        description: post.description,
+        thumbnail: post.imageLinks.thumbnail
+
+      }
+    });
     this.route.navigate(['book', post.id]);
   }
 

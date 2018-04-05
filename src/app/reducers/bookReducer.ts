@@ -4,7 +4,7 @@ export const POST_BOOKS = 'POST_BOOKS';
 export const CURRENT_BOOK = 'CURRENT_BOOK';
 
 export function booksReducer(state: any, action: any) {
-  if (state === void 0) { state = []; }
+  if (state === void 0) { state = {}; }
   switch (action.type) {
     case POST_BOOKS:
       return action.payload;
